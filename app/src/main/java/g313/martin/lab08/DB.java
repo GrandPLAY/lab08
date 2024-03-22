@@ -58,10 +58,12 @@ public class DB  extends SQLiteOpenHelper {
         }
     }
 
-    public void alterNote(int id, String stxt){
+    public void alterNote(int id, int newID, String stxt){
         String sid = String.valueOf(id);
         SQLiteDatabase db = getWritableDatabase();
-        String sql = "UPDATE notes SET txt = '" + stxt + "' WHERE id = '" + sid + "';";
+        String sql = "UPDATE notes SET txt = '" + stxt + "' WHERE id = '" + sid + "'; ";
+        db.execSQL(sql);
+        sql = "UPDATE notes SET id = '" + newID + "' WHERE id = " + sid + ";";
         db.execSQL(sql);
     }
 
